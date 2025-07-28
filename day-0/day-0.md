@@ -15,8 +15,8 @@ explained during this lesson. [Glossay](./glossary.md)
 - **Portability**: Build once, run anywhere (as long as a container runtime is available).
 - **Efficiency**: Faster startup times and lower resource overhead than virtual machines.
 
-> 📘 Docs:  
-> - [What is a Container – Docker](https://www.docker.com/resources/what-container/)  
+> 📘 Docs:
+> - [What is a Container – Docker](https://www.docker.com/resources/what-container/)
 > - [Containers Overview – Red Hat](https://www.redhat.com/en/topics/containers)
 
 ---
@@ -31,7 +31,7 @@ A **distributed system** in the container ecosystem refers to an architecture wh
 
 Containers naturally enable this because they’re **stateless by design**, and platforms like Kubernetes manage orchestration.
 
-> 📘 Intro:  
+> 📘 Intro:
 > - [Distributed Systems Primer – Martin Kleppmann (YouTube)](https://www.youtube.com/watch?v=1xo-0gCVhTU)
 
 ---
@@ -42,17 +42,24 @@ Kubernetes (k8s) is an **open-source container orchestration platform** that aut
 
 ### 🔹 Maintainer:
 - **Owner**: CNCF (Cloud Native Computing Foundation), originally developed by Google.
-- **Repo**: https://github.com/kubernetes/kubernetes  
+- **Repo**: https://github.com/kubernetes/kubernetes
 - **Docs**: https://kubernetes.io/docs/
 
 ### Key Components
 
+Logical Level:
 - API Server (Sets up the communication interface for interacting with K8s)
 - etcd (Stores the manifests, configuration and objects created on the Cluster)
 - Scheduler (Decides which pod will be scheduled in which node)
-- Controller Manager
-- kubelet (
-- kube-proxy
+- Controller Manager (Monitors and reconcile the cluster with the desired state)
+- kubelet (Agent that runs on each Kubernetes node and ensures
+that containers are running as specified in their Pod definitions)
+- kube-proxy (A network component that runs on each node and manages network rules to route traffic to the appropriate Pods inside the cluster)
+
+Hardware Level:
+- Master Node (A node that hosts the Kubernetes control plane components and manages the overall state and scheduling of the cluster)
+- Worker Node (A node that runs application Pods and is controlled by the master node; it executes workloads and reports status to the control plane)
+
 
 ---
 
@@ -68,7 +75,7 @@ Kubernetes (k8s) is an **open-source container orchestration platform** that aut
 
 ### 🔹 Maintainer:
 - **Owner**: Red Hat
-- **Repo**: https://github.com/openshift  
+- **Repo**: https://github.com/openshift
 - **Docs**: https://docs.openshift.com/container-platform/latest/
 
 ---
@@ -79,7 +86,7 @@ Kubernetes (k8s) is an **open-source container orchestration platform** that aut
 
 ### 🔹 Maintainer:
 - **Owner**: Red Hat / OpenShift Community
-- **Repo**: https://github.com/openshift/okd  
+- **Repo**: https://github.com/openshift/okd
 - **Docs**: https://www.okd.io/
 
 ---
@@ -128,23 +135,20 @@ Kubernetes (k8s) is an **open-source container orchestration platform** that aut
 - **Stateful workloads**: still more challenging
 - **Networking**: often misunderstood and non-trivial
 
-> 📘 Further Reading:  
-> - [Why Kubernetes is Popular – TechTarget](https://www.techtarget.com/searchitoperations/tip/Why-Kubernetes-gained-popularity-and-why-it-matters)  
+> 📘 Further Reading:
+> - [Why Kubernetes is Popular – TechTarget](https://www.techtarget.com/searchitoperations/tip/Why-Kubernetes-gained-popularity-and-why-it-matters)
 > - [History of Containers – Red Hat](https://www.redhat.com/en/topics/containers/what-are-linux-containers)
 
 ---
 
 ## 🧠 Exercise (Discussion)
 
-**Question:**  
+**Question:**
 What are the main differences between Kubernetes and OpenShift? When would you use each?
 
-**Expected Answer:**  
+**Expected Answer:**
 Kubernetes offers flexibility and community-driven innovation, ideal for custom setups. OpenShift offers opinionated defaults, security, and enterprise support, ideal for teams wanting an out-of-the-box platform with guardrails.
 
 ## 🧠 Exercise (Research task)
 **Question:**
 Why Openshift has three master nodes, and not two or four?
-
-**Expected Answer:**
-
