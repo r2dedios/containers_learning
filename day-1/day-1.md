@@ -109,60 +109,87 @@ Node roles are defined through **labels and taints**.
 
 ---
 
-## 6. What Are Operators?
+## 6. Basic workloads
 
-An **Operator** is a controller + CRD pattern that encapsulates domain knowledge for managing specific applications on Kubernetes.
+In Kubernetes, **Workloads** are API objects that manage and run containers.  They define how applications are deployed, scaled, and updated over time.
 
-### Operators:
+### Deployment
 
-- Watch custom resources (CRDs).
-- Automate tasks: provisioning, updates, backups, scaling, health checks.
-- Can be created with the [Operator SDK](https://sdk.operatorframework.io/).
+A `Deployment` is a Kubernetes resource that declaratively manages the lifecycle
+  of application Pods. It ensures that the specified number of replicas are
+  running and enables rolling updates and rollbacks.
 
-This allows you to treat complex applications (e.g., Prometheus, Logging stack, OpenShift Console) as native Kubernetes objects.
+  **Key Characteristics:**
+  - Defines the desired state of Pods and ReplicaSets.
+  - - Supports rolling updates with zero downtime.
+  - - Enables rollback to previous versions.
+  - - Automatically replaces failed Pods.
 
-### Example: Console Operator Manifest
-#### CRD
-```yaml
-apiVersion: apiextensions.k8s.io/v1
-kind: CustomResourceDefinition
-metadata:
-  name: websites.myapps.example.com
-spec:
-  group: myapps.example.com
-  versions:
-    - name: v1
-      served: true
-      storage: true
-      schema:
-        openAPIV3Schema:
-          type: object
-          properties:
-            spec:
-              type: object
-              properties:
-                replicas:
-                  type: integer
-                image:
-                  type: string
-  scope: Namespaced
-  names:
-    plural: websites
-    singular: website
-    kind: Website
-    shortNames:
-      - web
-```
-#### CR instance
-```yaml
-apiVersion: myapps.example.com/v1
-kind: Website
-metadata:
-  name: example-site
-spec:
-  replicas: 2
-  image: nginx
-```
+📘 [Deployment – Kubernetes Docs](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+
+
+### ReplicaSet
+
+A `ReplicaSet` ensures that a specified number of identical Pods are running at
+  all times. It is primarily used by Deployments and rarely created directly.
+
+  **Key Characteristics:**
+  - Maintains the correct number of replicas.
+  - - Replaces Pods if they fail or are deleted.
+  - - Selected by matching `labels`.
+📘 [ReplicaSet – Kubernetes Docs](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)
+
+
+### Pod
+
+A `Pod` is the smallest deployable unit in Kubernetes. It encapsulates one or
+  more containers that share storage, network, and a specification for how to
+  run the containers.
+
+  **Key Characteristics:**
+  - Atomic unit of deployment.
+  - - Containers in the same Pod share IP and localhost.
+  - - Lifecycle is managed as a single entity.
+  - - Typically ephemeral by nature.
+📘 [Pods – Kubernetes Docs](https://kubernetes.io/docs/concepts/workloads/pods/)
+
+### Container
+
+A `Container` is a lightweight, isolated runtime environment for a single
+  process. In Kubernetes, containers run inside Pods and are managed by a
+  container runtime like CRI-O or containerd.
+
+  **Key Characteristics:**
+  - Encapsulates application code, dependencies, and environment.
+  - - Fast to start, portable, and resource-efficient.
+  - - Stateless and isolated from the host system.
+📘 [Containers Overview – Kubernetes
+Docs](https://kubernetes.io/docs/concepts/containers/)
+
+### ConfigMap
+
+A `ConfigMap` is a Kubernetes object used to inject configuration data into
+  Pods. It decouples configuration from application code.
+
+  **Key Characteristics:**
+  - Stores key-value pairs.
+  - - Can be consumed as environment variables, command-line args, or mounted
+      volumes.
+      - Not intended for sensitive data.
+📘 [ConfigMap – Kubernetes Docs](https://kubernetes.io/docs/concepts/configuration/configmap/)
+
+### Secret
+
+A `Secret` is a Kubernetes object used to securely store and manage sensitive
+  information, such as passwords, tokens, and SSH keys.
+
+  **Key Characteristics:**
+  - Stores base64-encoded key-value data.
+  - - Can be mounted as files or injected as environment variables.
+  - - More secure than ConfigMaps due to controlled access.
+📘 [Secret – Kubernetes
+Docs](https://kubernetes.io/docs/concepts/configuration/secret/)
+
 
 
 ## 🧠 Exercise (Discussion)
@@ -256,3 +283,9 @@ Create a ConfigMap and learning how to connect it with a Deployment
 2. What happens when you update the ConfigMap? Is the pod also updated? Is there any step missing?
 3. Now remove the ConfigMap and re-create it in the `default` namespace and then remove the pod `oc delete pod/<POD_NAME>`. Describe what happens
 4. Can you edit the ConfigMap content from the pods' running instance?
+
+
+### Step 3 (Extra): Secret
+1. Move the EnvVar from the ConfigMap to a Secret called `day-1-secret`
+2. Modify the Deployment to load the vars from the Secret instead of the
+   ConfigMap

@@ -8,3 +8,7 @@
 
 * [Day 0 Document](./day-0/day-0.md)
 * [Glossary](./day-0/glossary.md)
+
+## Day 1: Architecture and Core Concepts
+
+* [Day 1 Document](./day-1/day-1.md)
