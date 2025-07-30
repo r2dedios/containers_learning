@@ -4,7 +4,7 @@
 
 Containers are lightweight, portable units that package an application and its dependencies together. They share the host OS kernel but run in isolated user spaces.
 
-### Glossay
+### Glossary
 
 Before continuing, check this document for getting definitions of the concepts
 explained during this lesson. [Glossay](./glossary.md)
@@ -39,6 +39,7 @@ Containers naturally enable this because they’re **stateless by design**, and 
 ## 2. What is Kubernetes (K8s)?
 
 Kubernetes (k8s) is an **open-source container orchestration platform** that automates the deployment, scaling, and management of containerized applications.
+It doesn't include any Ingress, Storage provider, or user management system by default, but it sets the mechanisms for the admin to configure the one they want
 
 ### 🔹 Maintainer:
 - **Owner**: CNCF (Cloud Native Computing Foundation), originally developed by Google.
@@ -112,9 +113,12 @@ Hardware Level:
 - **chroot (1979)** → process isolation
 - **FreeBSD Jails / Solaris Zones**
 - **LXC (2008)** → Linux Containers
+- **Apache Mesos (2009)** → Distributed cluster manager that efficiently runs applications and containers at scale.
 - **Docker (2013)** → simplified packaging and runtime
 - **Kubernetes (2014)** → orchestrator for containers
+- **Docker Swarm (2016)** → orchestrator for Docker containers by Docker Inc
 - **OpenShift (v3 onwards)** → Kubernetes-based PaaS
+- **OpenShift (v4)**  → Improvements in architecture, installation and CRI
 
 ---
 
@@ -122,22 +126,31 @@ Hardware Level:
 
 ### ✅ Advantages
 
-- **Dev/prod parity**: same image runs everywhere
-- **Automation**: deployments, scaling, and healing
-- **Speed**: fast boot and restart times
-- **Ecosystem**: huge CNCF landscape of tools
-- **Multicloud-ready**: cloud-agnostic deployments
+- **Dev/prod parity**: Same image runs everywhere
+- **Automation**: Deployments, scaling, and healing
+- **Speed**: Fast boot and restart times
+- **Ecosystem**: Huge CNCF landscape of tools
+- **Multicloud-ready**: Cloud-agnostic deployments
+- **
 
 ### ❌ Disadvantages
 
-- **Complexity**: steep learning curve
-- **Observability**: requires tools (Prometheus, Grafana)
-- **Stateful workloads**: still more challenging
-- **Networking**: often misunderstood and non-trivial
+- **Complexity**: Steep learning curve
+- **Observability**: Requires external tools (Prometheus, Grafana)
+- **Stateful workloads**: Still more challenging, but can be adapted
+- **Networking**: Often misunderstood and non-trivial
 
 > 📘 Further Reading:
 > - [Why Kubernetes is Popular – TechTarget](https://www.techtarget.com/searchitoperations/tip/Why-Kubernetes-gained-popularity-and-why-it-matters)
 > - [History of Containers – Red Hat](https://www.redhat.com/en/topics/containers/what-are-linux-containers)
+
+### Other characteristics
+
+- **Self-healing**: Detects and replace failing or unresponsive containers
+- **Modular**: Allows extending its functionality by adding Custom Resource Definitions (CRDs)
+- **Autoscaling**: Can adjust automatically the amount of containers based on the workload demand
+- **Declarative and Imperative**: Supports receiving orders by using manifests (declarative) and by using CLI commands (Imperative)
+- **Load Balancing**: Native network LB and service discovery
 
 ---
 
@@ -148,6 +161,16 @@ What are the main differences between Kubernetes and OpenShift? When would you u
 
 **Expected Answer:**
 Kubernetes offers flexibility and community-driven innovation, ideal for custom setups. OpenShift offers opinionated defaults, security, and enterprise support, ideal for teams wanting an out-of-the-box platform with guardrails.
+
+
+## 🧠 Exercise (Discussion)
+
+**Question:**
+What are the main differences between Virtual Machines and Containers?
+
+**Expected Answer:**
+Containers uses the kernel of the host where they are running and VMs deploys and uses their own Kernel which is totally separated from the hosts' kernel.  Additionally, containers are ephemeral, which means they are stateless, short-lived runtime and their filesystem, process state and data are non-persistent.
+
 
 ## 🧠 Exercise (Research task)
 **Question:**
