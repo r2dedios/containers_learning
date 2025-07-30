@@ -218,7 +218,7 @@ Research about how Openshift configures the role of the nodes. In other words, h
 Create a deployment (using the declarative way, in other words, manifests) in
 your personal namespace, that configures the following parameters for your
 workload:
-1. Deployment name: `day-1-deploymenyt`
+1. Deployment name: `day-1-deployment`
 2. Image: `registry.redhat.io/ubi9/ubi:9.6-1753769805`. (Check this
    [link](https://access.redhat.com/articles/RegistryAuthentication#:~:text=To%20login%20to%20the%20registry,article%20with%20the%20podman%20command.)
    for logging on `registry.redhat.io`)
