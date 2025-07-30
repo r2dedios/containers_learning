@@ -245,7 +245,7 @@ workload:
     while true; do
       echo "This is the pod '$CONQUEROR_NAME' running on '$HOSTNAME'"
       sleep 10
-    done  
+    done
     ```
 7. The deployment deploys 1 replicas
 8. The deployment defines environment vars in the Pod' templates
@@ -289,3 +289,7 @@ Create a ConfigMap and learning how to connect it with a Deployment
 1. Move the EnvVar from the ConfigMap to a Secret called `day-1-secret`
 2. Modify the Deployment to load the vars from the Secret instead of the
    ConfigMap
+
+**Questions**:
+1. What's the real difference between a ConfigMap and a Secret?
+2. Are Secrets safer? If yes, explain why
