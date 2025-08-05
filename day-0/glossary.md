@@ -227,7 +227,7 @@ A piece of storage in the cluster that has been provisioned by an administrator 
 ### **Volume Binding (Docker/Podman context)**
 In Docker or Podman, volume binding refers to the practice of mounting a host directory or volume into a container. This is used to persist data or provide configuration files from the host to the container.
 
-📘 [Bind Mounts – Docker](https://docs.docker.com/storage/bind-mounts/)  
+📘 [Bind Mounts – Docker](https://docs.docker.com/storage/bind-mounts/)
 📘 [Volumes – Podman](https://docs.podman.io/en/latest/markdown/podman-run.1.html#volume-v)
 
 ---
@@ -236,3 +236,9 @@ In Docker or Podman, volume binding refers to the practice of mounting a host di
 The primary node agent that runs on each Kubernetes node. It ensures the containers are running according to the PodSpec sent by the API Server.
 
 📘 [kubelet – Kubernetes](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/)
+
+### **OVN-Kubernetes**
+OVN-Kubernetes is the default CNI (Container Network Interface) plugin in OpenShift that provides a virtual networking layer using Open Virtual Network (OVN) to manage Pod-to-Pod, Pod-to-Service, and ingress/egress traffic. It supports advanced features like network policies, egress IPs, and dual-stack networking.
+
+
+📘 [OVN-Kubernetes](https://ovn-kubernetes.io/)

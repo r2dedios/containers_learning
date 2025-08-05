@@ -12,3 +12,7 @@
 ## Day 1: Architecture and Core Concepts
 
 * [Day 1 Document](./day-1/day-1.md)
+
+## Day 2: Networking Fundamentals
+
+* [Day 2 Document](./day-2/day-2.md)
