@@ -139,10 +139,10 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-			app: http-echo
-			lesson: day-2
-			purpose: testing
-			version: v1
+      app: http-echo
+      lesson: day-2
+      purpose: testing
+      version: v1
   template:
     metadata:
       name: learning-pod
@@ -153,17 +153,17 @@ spec:
         version: v1
     spec:
       restartPolicy: Always
-			containers:
-				- name: ip-echo
-					image: busybox:latest
-					command: ["sh", "-c"]
-					args:
-						- |
-							while true; do
-								echo -e "HTTP/1.1 200 OK\\n\\n Hello, I'm $(hostname -i)" | nc -l -p 8080;
-							done
-					ports:
-					- containerPort: 8080
+      containers:
+        - name: ip-echo
+          image: busybox:latest
+          command: ["sh", "-c"]
+          args:
+            - |
+              while true; do
+                echo -e "HTTP/1.1 200 OK\\n\\n Hello, I'm $(hostname -i)" | nc -l -p 8080;
+              done
+          ports:
+          - containerPort: 8080
 ```
 
 Create a ClusterIP Service for accessing the entire set of replicas on port 1234
