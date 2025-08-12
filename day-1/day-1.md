@@ -187,8 +187,7 @@ A `Secret` is a Kubernetes object used to securely store and manage sensitive
   - Stores base64-encoded key-value data.
   - - Can be mounted as files or injected as environment variables.
   - - More secure than ConfigMaps due to controlled access.
-📘 [Secret – Kubernetes
-Docs](https://kubernetes.io/docs/concepts/configuration/secret/)
+📘 [Secret – Kubernetes Docs](https://kubernetes.io/docs/concepts/configuration/secret/)
 
 
 

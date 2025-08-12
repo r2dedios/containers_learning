@@ -12,7 +12,7 @@ Each OpenShift node (control plane or worker) is a **real or virtual machine** c
 - Reach the outside world (internet, registries, etc.)
 - Expose services to clients
 
-📌 Note: Default physical IP CIDR Block `10.0.3.25`.
+📌 Note: Default physical IP CIDR Block `10.0.0.0/16`.
 
 ---
 
