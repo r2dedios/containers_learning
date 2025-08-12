@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: day-1-deployment
+  labels:
+    owner: alejandro
+    lesson: day-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: learning-pod
+  template:
+    metadata:
+      name: learning-pod
+      labels:
+        app: learning-pod
+        owner: alejandro
+        lesson: day-1
+        purpose: testing
+        version: v1
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: learning-pod
+          image: registry.redhat.io/ubi9/ubi:9.6-1753769805
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              if [ -z "$CONQUEROR_NAME" ]; then
+                echo "Env Var 'CONQUEROR_NAME' is not defined"
+                exit
+              fi
+
+              while true; do
+                echo "[$(date)] - I'm '$CONQUEROR_NAME' conquering the pod called '$HOSTNAME'"
+                sleep 10
+              done
+          env:
+            - name: CONQUEROR_NAME
+              value: "Napoleon Bonaparte"
