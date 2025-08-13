@@ -19,7 +19,7 @@ serves different use cases, levels of control, and flexibility.
 - The service is reachable via `<NodeIP>:<NodePort>`.
 - Basic and easy to use but **not production-grade** for most setups.
 
-**Use case:**  
+**Use case:**
 Quick testing, dev clusters without load balancers.
 
 📘 [NodePort – Kubernetes Docs](https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport)
@@ -34,7 +34,7 @@ Quick testing, dev clusters without load balancers.
 - Provides a stable IP for external access.
 - Can be used in BareMetal, but replacing the public cloud provider by another provider (like [MetalLB](https://metallb.io/))
 
-**Use case:**  
+**Use case:**
 Cloud-native environments with native load balancer integrations.
 
 📘 [LoadBalancer – Kubernetes Docs](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer)
@@ -48,7 +48,7 @@ Cloud-native environments with native load balancer integrations.
 - Requires an **Ingress Controller** (e.g., NGINX, HAProxy, Traefik).
 - Allows **host-based and path-based** routing (Requires Layer 7)
 
-**Use case:**  
+**Use case:**
 Centralized routing for HTTP traffic with TLS support.
 
 📘 [Ingress – Kubernetes Docs](https://kubernetes.io/docs/concepts/services-networking/ingress/)
@@ -61,7 +61,7 @@ Centralized routing for HTTP traffic with TLS support.
 - Maps a `Service` to a publicly accessible DNS name.
 - Supports TLS termination, re-encryption, path routing.
 
-**Use case:**  
+**Use case:**
 Standard way to expose HTTP(S) workloads in OpenShift.
 
 📘 [Routes – OpenShift Docs](https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/ingress_and_load_balancing/configuring-routes)
@@ -74,7 +74,7 @@ Standard way to expose HTTP(S) workloads in OpenShift.
 - Separates **infrastructure (Gateway)** from **traffic policies (Routes)**.
 - Supports HTTP, TCP, TLS, gRPC via specific Route types.
 
-**Use case:**  
+**Use case:**
 Multi-protocol routing, multi-team environments, advanced L4/L7 control.
 
 📘 [Gateway API – Kubernetes](https://gateway-api.sigs.k8s.io/)
@@ -183,15 +183,15 @@ Apply this manifest:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: day-2-deployment
+  name: day-3-deployment
   labels:
-    lesson: day-2
+    lesson: day-3
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: http-echo
-      lesson: day-2
+      lesson: day-3
       purpose: testing
       version: v1
   template:
@@ -199,7 +199,7 @@ spec:
       name: learning-pod
       labels:
         app: http-echo
-        lesson: day-2
+        lesson: day-3
         purpose: testing
         version: v1
     spec:
@@ -250,7 +250,7 @@ metadata:
   name: day-3-A
   labels:
     lesson: day-3
-		app: A
+    app: A
 spec:
   replicas: 1
   selector:
@@ -263,10 +263,10 @@ spec:
     metadata:
       name: learning-pod
       labels:
-				app: A
-				lesson: day-3
-				purpose: testing
-				version: v1
+        app: A
+        lesson: day-3
+        purpose: testing
+        version: v1
     spec:
       restartPolicy: Always
       containers:
@@ -287,7 +287,7 @@ metadata:
   name: day-3-B
   labels:
     lesson: day-3
-		app: B
+    app: B
 spec:
   replicas: 1
   selector:
@@ -300,10 +300,10 @@ spec:
     metadata:
       name: learning-pod
       labels:
-				app: B
-				lesson: day-3
-				purpose: testing
-				version: v1
+        app: B
+        lesson: day-3
+        purpose: testing
+        version: v1
     spec:
       restartPolicy: Always
       containers:
@@ -319,4 +319,15 @@ spec:
           - containerPort: 8080
 ```
 **Question**
-- Expose Both services on the same route, but with different paths `/app-A` and `/app-B`
+- Expose Both services on the same route, but with different paths `/app-A` and
+`/app-B`. In other words, If the Route has the hostname
+`multipath-route.apps.cluster.base.domain` the route should work like:
+```sh
+curl -XGET https://multipath-route.apps.cluster.base.domain/app-A
+> Hello, I'm Deployment A: day-3-a-.....
+```
+```sh
+curl -XGET https://multipath-route.apps.cluster.base.domain/app-B
+> Hello, I'm Deployment B: day-3-b-.....
+```
+

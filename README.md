@@ -16,3 +16,7 @@
 ## Day 2: Networking Fundamentals
 
 * [Day 2 Document](./day-2/day-2.md)
+
+## Day 3: Networking Fundamentals
+
+* [Day 3 Document](./day-3/day-3.md)
